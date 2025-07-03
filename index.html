@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Atividades</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="css/preloader.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body id="corpo-principal" class="bg-slate-900 text-slate-300">
+
+    <div id="loading-screen" class="fixed inset-0 bg-slate-900 flex items-center justify-center z-[100]">
+        <div id="loader-container">
+            <div class="loader-block block-i-1" style="--d: 0.1s;"></div><div class="loader-block block-i-2" style="--d: 0.2s;"></div><div class="loader-block block-i-3" style="--d: 0.3s;"></div><div class="loader-block block-i-4" style="--d: 0.4s;"></div><div class="loader-block block-f-1" style="--d: 0.6s;"></div><div class="loader-block block-f-2" style="--d: 0.7s;"></div><div class="loader-block block-f-3" style="--d: 0.8s;"></div><div class="loader-block block-f-4" style="--d: 0.9s;"></div><div class="loader-block block-f-5" style="--d: 1.0s;"></div><div class="loader-block block-f-6" style="--d: 1.1s;"></div><div class="loader-block block-f-7" style="--d: 1.2s;"></div>
+        </div>
+    </div>
+
+    <div id="visao-principal" class="flex h-screen">
+        <aside id="controles" class="w-1/3 max-w-sm p-6 bg-slate-800/50 border-r border-slate-700 flex flex-col gap-8 overflow-y-auto">
+            <header>
+                <h1 class="text-2xl font-bold text-white flex items-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-sky-400"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-1.621-.87a3 3 0 01-.879-2.122v-1.007m-5.13-7.540A3.375 3.375 0 017.5 6.625v1.5a3.375 3.375 0 01-3.375 3.375s-1.125 0-1.125 1.125v4.5a1.125 1.125 0 001.125 1.125h12.75a1.125 1.125 0 001.125-1.125v-4.5s0-1.125-1.125-1.125a3.375 3.375 0 01-3.375-3.375v-1.5a3.375 3.375 0 012.25-3.121m-6.538 6.34a3.375 3.375 0 00-3.375-3.375" /></svg>
+                    Editor de Atividades
+                </h1>
+            </header>
+            <div id="area-criacao" class="campo-editavel flex flex-col gap-4">
+                <h3 class="text-lg font-semibold text-sky-400">Criar Nova Atividade</h3>
+                <input type="text" id="novo-titulo-atividade" placeholder="Título da nova atividade" class="bg-slate-700 border border-slate-600 rounded-md p-2 focus:ring-2 focus:ring-sky-500 focus:outline-none transition-colors">
+                <button id="btn-adicionar-atividade" class="flex items-center justify-center gap-2 bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                    Adicionar Atividade
+                </button>
+            </div>
+            <div class="flex flex-col gap-4">
+                <h3 class="text-lg font-semibold text-sky-400">Gerenciar Lista</h3>
+                <div>
+                    <label for="upload-json" class="block mb-2 text-sm font-medium">Carregar de JSON:</label>
+                    <input type="file" id="upload-json" accept=".json" class="block w-full text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-sky-50 file:text-sky-700 hover:file:bg-sky-100">
+                </div>
+                <button id="salvar-json" class="flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
+                    Salvar Alterações
+                </button>
+                <button id="btn-nova-lista" class="campo-editavel flex items-center justify-center gap-2 bg-slate-600 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105">
+                     <span class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></span>
+                     <span class="text-wrapper">Criar Nova Lista</span>
+                </button>
+                <div class="campo-editavel flex items-center gap-2 mt-2">
+                    <input type="checkbox" id="trava-conteudo" class="w-4 h-4 text-sky-600 bg-slate-700 border-slate-600 rounded focus:ring-sky-500">
+                    <label for="trava-conteudo" class="text-sm">Travar conteúdo (somente leitura)</label>
+                </div>
+            </div>
+        </aside>
+
+        <main id="conteudo-principal" class="w-2/3 flex-1 p-8 overflow-y-auto">
+            <section id="secao-pendentes">
+                <h2 class="text-3xl font-bold text-white border-b-2 border-sky-500 pb-2 mb-6 flex items-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    Atividades Pendentes
+                </h2>
+                <div id="lista-pendentes" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+            </section>
+            <section id="secao-concluidas" class="mt-12">
+                <h2 class="text-3xl font-bold text-white border-b-2 border-emerald-500 pb-2 mb-6 flex items-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    Atividades Concluídas
+                </h2>
+                <div id="lista-concluidas" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+            </section>
+        </main>
+    </div>
+
+    <div id="visao-detalhe" class="hidden fixed inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-300 opacity-0">
+        <div id="modal-content" class="bg-slate-800 w-full max-w-3xl max-h-[90vh] rounded-lg border border-slate-700 shadow-2xl flex flex-col transition-transform duration-300 scale-95">
+            <header class="p-4 border-b border-slate-700 flex justify-between items-center"><h2 id="detalhe-titulo" class="text-2xl font-bold text-white"></h2></header>
+            <main class="p-6 flex-1 overflow-y-auto">
+                <h3 class="text-lg font-semibold text-sky-400 mb-2">Descrição</h3>
+                <div class="campo-editavel mb-6"><textarea id="detalhe-descricao-input" placeholder="Adicione uma descrição..." class="w-full min-h-[100px] bg-slate-700 border border-slate-600 rounded-md p-2 focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea></div>
+                <h3 class="text-lg font-semibold text-sky-400 mb-2">Recursos</h3>
+                <ul id="detalhe-recursos-lista" class="flex flex-col gap-3 mb-6"></ul>
+                <div id="form-novo-recurso" class="campo-editavel bg-slate-700/50 p-4 rounded-md">
+                    <h4 class="font-semibold text-white mb-3">Adicionar Novo Recurso</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <input type="text" id="novo-recurso-tipo" placeholder="Tipo (ex: PDF)" class="bg-slate-700 border border-slate-600 rounded-md p-2">
+                        <input type="text" id="novo-recurso-nome" placeholder="Nome do link" class="bg-slate-700 border border-slate-600 rounded-md p-2">
+                        <input type="text" id="novo-recurso-url" placeholder="URL" class="bg-slate-700 border border-slate-600 rounded-md p-2">
+                    </div>
+                     <button id="btn-adicionar-recurso" class="w-full mt-3 bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-md transition-colors">Adicionar Recurso</button>
+                </div>
+            </main>
+            <footer class="p-4 border-t border-slate-700 flex justify-end gap-4">
+                <button id="btn-remover-atividade-detalhe" class="btn-confirmacao campo-editavel flex items-center justify-center gap-2 bg-rose-800 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded-md transition-all duration-300">
+                    <span class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg></span>
+                    <span class="text-wrapper">Remover Atividade</span>
+                </button>
+                <button id="btn-voltar" class="bg-slate-600 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-md transition-colors">Fechar</button>
+            </footer>
+        </div>
+    </div>
+
+    <div id="toast-container" class="fixed bottom-4 right-4 flex flex-col gap-3 z-50 w-full max-w-sm"></div>
+
+    <script src="js/script.js" defer></script>
+</body>
+</html>
