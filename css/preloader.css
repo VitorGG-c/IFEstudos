@@ -1,0 +1,40 @@
+#loading-screen { 
+    transition: opacity 0.75s ease-out; 
+}
+
+#loader-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 6px;
+}
+
+.loader-block {
+    width: 16px;
+    height: 16px;
+    background-color: #0ea5e9; /* Cor sky-500 do Tailwind */
+    border-radius: 2px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: block-pop-in 0.5s ease-out forwards;
+    animation-delay: var(--d);
+}
+
+@keyframes block-pop-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.block-i-1 { grid-column: 1; grid-row: 1; }
+.block-i-2 { grid-column: 1; grid-row: 2; }
+.block-i-3 { grid-column: 1; grid-row: 3; }
+.block-i-4 { grid-column: 1; grid-row: 4; }
+.block-f-1 { grid-column: 3; grid-row: 1; }
+.block-f-2 { grid-column: 3; grid-row: 2; }
+.block-f-3 { grid-column: 3; grid-row: 3; }
+.block-f-4 { grid-column: 3; grid-row: 4; }
+.block-f-5 { grid-column: 4; grid-row: 1; }
+.block-f-6 { grid-column: 5; grid-row: 1; }
+.block-f-7 { grid-column: 4; grid-row: 3; }
