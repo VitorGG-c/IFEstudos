@@ -1,0 +1,21 @@
+body { 
+    -webkit-font-smoothing: antialiased; 
+    -moz-osx-font-smoothing: grayscale; 
+}
+
+.toast-enter { 
+    opacity: 0; 
+    transform: translateX(100%); 
+}
+.toast-enter-active { 
+    opacity: 1; 
+    transform: translateX(0); 
+}
+.toast-exit { 
+    opacity: 1; 
+    transform: translateX(0); 
+}
+.toast-exit-active { 
+    opacity: 0; 
+    transform: translateX(100%); 
+}
